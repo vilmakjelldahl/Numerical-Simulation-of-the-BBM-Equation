@@ -17,10 +17,10 @@
 global D1 D3 P HI e_l e_r d1_l d1_r d2_r d2_l split_approx
 
 %plotting on/off    1/0
-plotting = 0;
+plotting = 1;
 
 %equation, 1-BBM equation. 2-Modified BBM equation
-n = 1;
+n = 2;
 
 %if n == 2, define which split approximation to use
 %1 - eq 14,  2 - eq 16
@@ -38,7 +38,7 @@ elseif n == 2
 end 
 
 %number of spatial grid points
-mx = 201; 
+mx = 51; 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -77,11 +77,9 @@ Ix = eye(mx);
 
 % BC projection
 if n == 1
-    %eq 19
     L = [e_l' ; e_r' ; d1_r];
     P = Ix - HI*L'*inv(L*HI*L')*L;
 elseif n == 2
-    % eq35
     L = [e_l' ; e_r' ; d1_r];
     P = Ix - HI*L'*inv(L*HI*L')*L;
 end

@@ -18,10 +18,10 @@
 global D1 D3 HI e_l e_r d1_l d1_r d2_r d2_l split_approx
 
 %plotting on/off    1/0
-plotting = 0;
+plotting = 1;
 
 %equation, 1-BBM equation. 2-Modified BBM equation
-n = 1;
+n = 2;
 
 %if n == 2, define which split approximation to use
 %1 - eq 14,  2 - eq 16
@@ -39,7 +39,7 @@ elseif n == 2
 end 
 
 %number of spatial grid points
-mx = 201;
+mx = 51;
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
@@ -137,7 +137,6 @@ function Vout = RHS(v, a, n)
     global D1 D3 HI e_l e_r d1_r d2_r d2_l split_approx
     
     if n == 1
-        % 1
         SAT1 = -1/2*HI*(2*a/3*e_l*e_l'*v + 2*d2_l' + e_l )*(e_l'*v);
         SAT2 = 1/2*HI*(2*a/3*e_r*e_r'*v + 2*d2_r' + e_r )*(e_r'*v);
         SAT3 = -1/2*HI*d1_r'*(d1_r * v);
@@ -146,7 +145,6 @@ function Vout = RHS(v, a, n)
         Vout = -D1*v - a/3*D1*v.^2 - a/3 * v .*D1 *v - D3*v + SAT;
 
     elseif n == 2
-        %eq 37
         SAT1 = -1/2*HI*(a/2*e_l*e_l'*v.^2 + 2*d2_l' + e_l )*(e_l'*v);
         SAT2 = 1/2*HI*(a/2*e_r*e_r'*v.^2 + 2*d2_r' + e_r )*(e_r'*v);
         SAT3 = -1/2*HI*d1_r'*(d1_r * v);
